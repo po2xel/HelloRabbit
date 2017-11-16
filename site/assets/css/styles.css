@@ -20,21 +20,30 @@ h4{
 }
 
 .container{
-    max-width: 1000px;
+    /*max-height: 50%;*/
+    /*height: 50%;*/
     margin: 50px auto;
     padding: 20px;
-    background-color: #efefef;
+    /*background-color: #efefef;*/
 }
 
 .app{
-    width: 100%;
+    width:320px;
     position: relative;
+    float: left;
+}
+
+.result {
+    float: right;
+    width:320px;
+    background-color: #FFA;
+    text-align: center;
 }
 
 .app #start-camera{
     display: none;
     border-radius: 3px;
-    max-width: 400px;
+    /*max-width: 400px;*/
     color: #fff;
     background-color: #448AFF;
     text-decoration: none;

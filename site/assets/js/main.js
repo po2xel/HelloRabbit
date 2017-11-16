@@ -2,6 +2,23 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    var conn;
+    if (window["WebSocket"]) {
+        conn = new WebSocket("ws://10.0.0.6:8080/ws");
+        conn.onclose = function (evt) {
+            var item = document.createElement("div");
+            item.innerHTML = "<b>Connection closed.</b>";
+            appendLog(item);
+        };
+        conn.onmessage = function (evt) {
+            image.setAttribute('src', evt.data);
+        };
+    } else {
+        var item = document.createElement("div");
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
+        appendLog(item);
+    }
+
     // References to all the element we will need.
     var video = document.querySelector('#camera-stream'),
         image = document.querySelector('#photo'),
@@ -53,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     take_photo_btn.addEventListener("click", function(e){
         var snap = takeSnapshot();
         e.preventDefault();
+        conn.send(snap);
 
         // Show image. 
         image.setAttribute('src', snap);
